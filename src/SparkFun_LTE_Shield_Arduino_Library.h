@@ -302,6 +302,16 @@ public:
 
     LTE_Shield_error_t gpsRequest(unsigned int timeout, uint32_t accuracy, boolean detailed = true);
 
+    // Send command with an expected (potentially partial) response, store entire response
+    LTE_Shield_error_t sendCommandWithResponse(const char * command, const char * expectedResponse, 
+        char * responseDest, unsigned long commandTimeout, boolean at = true);
+
+    void powerOn(void);
+
+    void powerOff(void);
+
+    void hwReset(void);
+
 private:
 
     HardwareSerial * _hardSerial;
@@ -334,9 +344,7 @@ private:
 
     LTE_Shield_error_t init(unsigned long baud, LTE_Shield_init_type_t initType = LTE_SHIELD_INIT_STANDARD);
 
-    void powerOn(void);
-
-    void hwReset(void);
+    
 
     LTE_Shield_error_t functionality(LTE_Shield_functionality_t function = FULL_FUNCTIONALITY);
 
@@ -346,10 +354,6 @@ private:
     // Wait for an expected response (don't send a command)
     LTE_Shield_error_t waitForResponse(const char * expectedResponse, uint16_t timeout);
 
-    // Send command with an expected (potentially partial) response, store entire response
-    LTE_Shield_error_t sendCommandWithResponse(const char * command, const char * expectedResponse, 
-        char * responseDest, unsigned long commandTimeout, boolean at = true);
-
     // Send a command -- prepend AT if at is true
     boolean sendCommand(const char * command, boolean at);
 
@@ -357,7 +361,7 @@ private:
     LTE_Shield_error_t parseSocketListenIndication(IPAddress localIP, IPAddress remoteIP);
     LTE_Shield_error_t parseSocketCloseIndication(String * closeIndication);
 
-// UART Functions
+    // UART Functions
     size_t hwPrint(const char * s);
     size_t hwWrite(const char c);
     int readAvailable(char * inString);

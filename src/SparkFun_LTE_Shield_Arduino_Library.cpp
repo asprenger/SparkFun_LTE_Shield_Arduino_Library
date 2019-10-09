@@ -415,6 +415,9 @@ String LTE_Shield::ccid(void)
 
 LTE_Shield_error_t LTE_Shield::reset(void)
 {
+
+    Serial.println("SILENT RESET");
+
     LTE_Shield_error_t err;
     
     err = functionality(SILENT_RESET);
@@ -1515,6 +1518,8 @@ LTE_Shield_error_t LTE_Shield::init(unsigned long baud,
 {
     LTE_Shield_error_t err;
 
+    Serial.println("INIT " + String(initType));
+
     beginSerial(baud); // Begin serial
 
     if (initType == LTE_SHIELD_INIT_AUTOBAUD)
@@ -1553,14 +1558,26 @@ LTE_Shield_error_t LTE_Shield::init(unsigned long baud,
 
 void LTE_Shield::powerOn(void)
 {
+    Serial.println("POWER ON");
     pinMode(_powerPin, OUTPUT);
     digitalWrite(_powerPin, LOW);
-    delay(LTE_SHIELD_POWER_PULSE_PERIOD);
+    //delay(LTE_SHIELD_POWER_PULSE_PERIOD);
+    delay(150);
+    pinMode(_powerPin, INPUT); // Return to high-impedance, rely on SARA module internal pull-up
+}
+
+void LTE_Shield::powerOff(void)
+{
+    Serial.println("POWER OFF");
+    pinMode(_powerPin, OUTPUT);
+    digitalWrite(_powerPin, LOW);
+    delay(1600);
     pinMode(_powerPin, INPUT); // Return to high-impedance, rely on SARA module internal pull-up
 }
 
 void LTE_Shield::hwReset(void)
 {
+    Serial.println("HW RESET");
     pinMode(_resetPin, OUTPUT);
     digitalWrite(_resetPin, LOW);
     delay(LTE_RESET_PULSE_PERIOD);
