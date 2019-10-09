@@ -32,6 +32,9 @@ typedef struct {
   const boolean cleanSession;
 } MQTTConfig;
 
+int registerOperator(LTE_Shield *lte, mobile_network_operator_t mno, String apn, 
+                     unsigned long networkId);
+
 int checkNetworkRegistration(LTE_Shield *lte, LTEConfig *lteConfig, 
                              int maxRetry=INT_MAX, int retryDelay=2000);
 
