@@ -1,5 +1,6 @@
-#ifndef LTE_MQTT_H
-#define LTE_MQTT_H
+
+#ifndef SPARKFUN_LTE_SHIELD_ARDUINO_LIBRARY_LTE_MQTT_H
+#define SPARKFUN_LTE_SHIELD_ARDUINO_LIBRARY_LTE_MQTT_H
 
 #include <SparkFun_LTE_Shield_Arduino_Library.h>
 #include <climits>
@@ -22,6 +23,8 @@ typedef struct {
   const unsigned int port;
   // Topic for outgoing data messages
   char *dataTopic;
+  // Topic for outgoing health messages
+  char *healthTopic;
   // Topic for incoming command messages
   char *commandTopic;
   // Username

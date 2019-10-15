@@ -312,6 +312,14 @@ public:
 
     void hwReset(void);
 
+    typedef enum {
+        LTE_SHIELD_INIT_STANDARD,
+        LTE_SHIELD_INIT_AUTOBAUD,
+        LTE_SHIELD_INIT_RESET
+    } LTE_Shield_init_type_t;
+
+    LTE_Shield_error_t init(unsigned long baud, LTE_Shield_init_type_t initType = LTE_SHIELD_INIT_STANDARD);
+
 private:
 
     HardwareSerial * _hardSerial;
@@ -329,11 +337,6 @@ private:
     void (*_socketCloseCallback)(int);
     void (*_gpsRequestCallback)(ClockData, PositionData, SpeedData, unsigned long);
 
-    typedef enum {
-        LTE_SHIELD_INIT_STANDARD,
-        LTE_SHIELD_INIT_AUTOBAUD,
-        LTE_SHIELD_INIT_RESET
-    } LTE_Shield_init_type_t;
 
     typedef enum {
         MINIMUM_FUNCTIONALITY = 0,
@@ -341,10 +344,6 @@ private:
         SILENT_RESET = 15,
         SILENT_RESET_W_SIM = 16
     } LTE_Shield_functionality_t;
-
-    LTE_Shield_error_t init(unsigned long baud, LTE_Shield_init_type_t initType = LTE_SHIELD_INIT_STANDARD);
-
-    
 
     LTE_Shield_error_t functionality(LTE_Shield_functionality_t function = FULL_FUNCTIONALITY);
 

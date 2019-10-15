@@ -1,10 +1,11 @@
 
-#ifndef LOG_MAX_STRING_LENGTH
+#ifndef SPARKFUN_LTE_SHIELD_ARDUINO_LIBRARY_LOGGING_H
+#define SPARKFUN_LTE_SHIELD_ARDUINO_LIBRARY_LOGGING_H
+
 #define LOG_MAX_STRING_LENGTH 160
-#endif
 
 #define LOG(_level, _format, ...) \
-  log(_level, _format, __VA_ARGS__);
+  log(_level, _format, ##__VA_ARGS__);
 
 typedef enum LogLevel {
         DEBUG = 0,
@@ -17,3 +18,5 @@ typedef enum LogLevel {
 void setLogLevel(LogLevel level);
 LogLevel getLogLevel();
 void log(int level, const char *fmt, ...);
+
+#endif
