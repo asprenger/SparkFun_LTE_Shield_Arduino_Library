@@ -59,6 +59,31 @@ void NetworkManager::InitReady() {
     LOG(INFO, "MNO profile: %d", profile);
   }
 
+
+
+  if (profile != 31) {
+
+    LOG(INFO, "Set MNO profile 31");
+    memset(response, 0, NET_MGR_RESPONSE_SIZE);
+    r = lte_->sendCommandWithResponse("+UMNOPROF=31", LTE_SHIELD_RESPONSE_OK, response, NET_MGR_AT_TIMEOUT);
+
+    LOG(INFO, "Reset modem");
+    r = lte_->reset();
+    if (r != LTE_SHIELD_ERROR_SUCCESS) {
+      LOG(ERROR, "Error");
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
   // Set COPS operator format to numeric
 
   memset(response, 0, NET_MGR_RESPONSE_SIZE);
@@ -67,14 +92,14 @@ void NetworkManager::InitReady() {
     LOG(ERROR, "Error COPS=3,2");
   }
 
-  /////////////////////////////
+
   // Force Cat NB-only mode
+
   memset(response, 0, NET_MGR_RESPONSE_SIZE);
   r = lte_->sendCommandWithResponse("+URAT=8", LTE_SHIELD_RESPONSE_OK, response, NET_MGR_AT_TIMEOUT); 
   if (r != LTE_SHIELD_ERROR_SUCCESS) {
     LOG(ERROR, "Error URAT=8");
   }
-  /////////////////////////////
 
   // Disable eDRX
 

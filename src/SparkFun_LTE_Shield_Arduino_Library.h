@@ -318,9 +318,16 @@ public:
         LTE_SHIELD_INIT_RESET
     } LTE_Shield_init_type_t;
 
-    LTE_Shield_error_t init(unsigned long baud, LTE_Shield_init_type_t initType = LTE_SHIELD_INIT_STANDARD);
+    typedef enum {
+        MINIMUM_FUNCTIONALITY = 0,
+        FULL_FUNCTIONALITY = 1,
+        SILENT_RESET = 15,
+        SILENT_RESET_W_SIM = 16
+    } LTE_Shield_functionality_t;
 
-    LTE_Shield_error_t autobaud(unsigned long desiredBaud);
+    LTE_Shield_error_t functionality(LTE_Shield_functionality_t function = FULL_FUNCTIONALITY);
+
+    LTE_Shield_error_t init(unsigned long baud, LTE_Shield_init_type_t initType = LTE_SHIELD_INIT_STANDARD);
 
 private:
 
@@ -328,6 +335,8 @@ private:
 #ifdef LTE_SHIELD_SOFTWARE_SERIAL_ENABLED
     SoftwareSerial * _softSerial;
 #endif
+
+    LTE_Shield_error_t autobaud(unsigned long desiredBaud);
 
     uint8_t _powerPin;
     uint8_t _resetPin;
@@ -338,16 +347,6 @@ private:
     void (*_socketReadCallback)(int, String);
     void (*_socketCloseCallback)(int);
     void (*_gpsRequestCallback)(ClockData, PositionData, SpeedData, unsigned long);
-
-
-    typedef enum {
-        MINIMUM_FUNCTIONALITY = 0,
-        FULL_FUNCTIONALITY = 1,
-        SILENT_RESET = 15,
-        SILENT_RESET_W_SIM = 16
-    } LTE_Shield_functionality_t;
-
-    LTE_Shield_error_t functionality(LTE_Shield_functionality_t function = FULL_FUNCTIONALITY);
 
     LTE_Shield_error_t setMno(mobile_network_operator_t mno);
     LTE_Shield_error_t getMno(mobile_network_operator_t * mno);
