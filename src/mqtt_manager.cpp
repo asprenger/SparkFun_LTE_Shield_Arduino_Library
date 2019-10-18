@@ -12,7 +12,7 @@ boolean MqttManager::connect() {
   metrics_->mqttConnectCount++;
 
   unsigned long mqttConnectStart = millis();
-  boolean mqttConnected = pubSubClient_->connect(mqttConfig_->clientId, mqttConfig_->username, mqttConfig_->password, 0, 0, 0, 0, mqttConfig_->cleanSession);
+  boolean mqttConnected = pubSubClient_->connect(mqttConfig_->clientId(), mqttConfig_->username(), mqttConfig_->password(), 0, 0, 0, 0, mqttConfig_->cleanSession());
   unsigned long mqttConnectTime = millis() - mqttConnectStart;
 
   if (mqttConnected) {

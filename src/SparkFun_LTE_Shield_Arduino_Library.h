@@ -320,6 +320,8 @@ public:
 
     LTE_Shield_error_t init(unsigned long baud, LTE_Shield_init_type_t initType = LTE_SHIELD_INIT_STANDARD);
 
+    LTE_Shield_error_t autobaud(unsigned long desiredBaud);
+
 private:
 
     HardwareSerial * _hardSerial;
@@ -370,7 +372,7 @@ private:
     void setTimeout(unsigned long timeout);
     bool find(char * target);
 
-    LTE_Shield_error_t autobaud(unsigned long desiredBaud);
+    
 
     char * lte_calloc_char(size_t num);
 };

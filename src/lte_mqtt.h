@@ -14,6 +14,7 @@ typedef struct {
   const unsigned int networkId;
 } LTEConfig;
 
+/*
 typedef struct {
   // Client ID
   char *clientId;
@@ -34,6 +35,7 @@ typedef struct {
   // Clean session flag
   const boolean cleanSession;
 } MQTTConfig;
+*/
 
 int registerOperator(LTE_Shield *lte, mobile_network_operator_t mno, String apn, 
                      unsigned long networkId);
