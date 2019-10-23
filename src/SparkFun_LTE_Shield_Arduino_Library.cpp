@@ -1561,8 +1561,8 @@ void LTE_Shield::powerOn(void)
     Serial.println("POWER ON");
     pinMode(_powerPin, OUTPUT);
     digitalWrite(_powerPin, LOW);
-    //delay(LTE_SHIELD_POWER_PULSE_PERIOD);
-    delay(150);
+    delay(LTE_SHIELD_POWER_PULSE_PERIOD);
+    //delay(150);
     pinMode(_powerPin, INPUT); // Return to high-impedance, rely on SARA module internal pull-up
 }
 
