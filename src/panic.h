@@ -1,1 +1,0 @@
-void panic(uint16_t code);
